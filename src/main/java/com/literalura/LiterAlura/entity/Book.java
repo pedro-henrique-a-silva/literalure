@@ -85,4 +85,15 @@ public class Book {
   public void setLanguages(List<Language> languages) {
     this.languages = languages;
   }
+
+  @Override
+  public String toString() {
+    return "Book{" +
+        "id=" + id +
+        ", title='" + title + '\'' +
+        ", authors=" + authors +
+        ", languages=" + languages +
+        ", downloadCount=" + downloadCount +
+        '}';
+  }
 }

@@ -1,6 +1,8 @@
 package com.literalura.LiterAlura.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,7 +20,7 @@ public class Author {
 
   private String name;
 
-  @ManyToMany(mappedBy = "authors")
+  @ManyToMany(fetch = FetchType.EAGER, mappedBy = "authors", cascade = CascadeType.ALL)
   private List<Book> books;
 
   private Long birthYear;
@@ -50,7 +52,7 @@ public class Author {
     this.name = name;
   }
 
-  public Number getBirthYear() {
+  public Long getBirthYear() {
     return birthYear;
   }
 
@@ -58,7 +60,7 @@ public class Author {
     this.birthYear = birthYear;
   }
 
-  public Number getDeathYear() {
+  public Long getDeathYear() {
     return deathYear;
   }
 

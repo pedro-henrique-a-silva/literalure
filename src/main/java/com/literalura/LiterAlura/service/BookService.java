@@ -7,7 +7,9 @@ import com.literalura.LiterAlura.repository.AuthorRepository;
 import com.literalura.LiterAlura.repository.BookRepository;
 import com.literalura.LiterAlura.repository.LanguageRepository;
 import com.literalura.LiterAlura.service.dto.AuthorApiDto;
+import com.literalura.LiterAlura.service.dto.AuthorFromDbDto;
 import com.literalura.LiterAlura.service.dto.BookApiDto;
+import com.literalura.LiterAlura.service.dto.BooksFromDbDto;
 import com.literalura.LiterAlura.service.dto.ResponseApiDto;
 import java.io.IOException;
 import java.util.List;
@@ -67,5 +69,25 @@ public class BookService {
 
       bookRepository.save(newBook);
     }
+  }
+
+  public List<BooksFromDbDto> getAllBooks() {
+
+    List<Book> books = bookRepository.findAll();
+
+    return books.stream().map(BooksFromDbDto::fromEntity).toList();
+  }
+
+  public List<AuthorFromDbDto> getAllAuthors() {
+
+    List<Author> books = authorRepository.findAll();
+
+    return books.stream().map(AuthorFromDbDto::fromEntity).toList();
+  }
+
+  public List<AuthorFromDbDto> getAllAuthorsByBirthYear(Integer year){
+    return authorRepository.findByDeathYearLessThanAndGreaterThanBirthYear(year)
+        .stream()
+        .map(AuthorFromDbDto::fromEntity).toList();
   }
 }
